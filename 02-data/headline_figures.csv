@@ -1,0 +1,17 @@
+figure,value,source_file
+meetings_analyzed,24,meetings.csv
+resolutions_voted,228,meetings.csv
+unanimous_votes,223,meetings.csv
+split_votes,0,meetings.csv
+abstentions,5,meetings.csv
+dollars_authorized_millions,871.25,meetings.csv
+public_speakers,10,meetings.csv
+meetings_with_speakers,5,meetings.csv
+resolutions_questioned,72,questions_by_resolution.csv
+resolutions_unquestioned,156,derived: 228 - 72
+questions_by_meeting,131,meetings.csv
+questions_by_resolution,96,questions_by_resolution.csv
+pgh_unanimity_pct,100.0,peer_comparison.csv
+peer_unanimity_pct,69.0,peer_comparison.csv
+follow_up_questions,40,follow_up.csv
+follow_up_ratio_to_avg,7.3,derived: 40 / (131/24)

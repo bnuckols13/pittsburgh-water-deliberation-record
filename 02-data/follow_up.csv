@@ -1,0 +1,3 @@
+metric,value,note
+first_post_publication_questions,40,"Board questions at the first meeting after the baseline story published"
+stop_work_orders_issued,1,"Board issued a stop-work order against a high-volume contractor"

@@ -1,0 +1,91 @@
+{
+  "investigation": "Pittsburgh Water Deliberation Record",
+  "description": "Sources behind the two published Public Source stories on the Pittsburgh Water board, and the peer comparison. Each 'file' source is fetched, content-validated, and hashed by capture.py; each 'citation' source is a live URL archived to the Wayback Machine (statutes, press releases, and the published stories themselves, which are not re-hosted here).",
+  "sources": [
+    {
+      "id": "pgh-board-minutes-portal",
+      "title": "Pittsburgh Water board minutes and agendas (24 meetings, Oct 2023 - Sep 2025)",
+      "url": "https://www.pgh2o.com/about-us/board-board-meetings/board-minutes-agendas",
+      "mode": "citation",
+      "note": "The source of record for every meeting-level figure. The 24 individual meeting-minute PDFs are the next archiving step; the master coding of them lives in 02-data/ and reproduces via build.py."
+    },
+    {
+      "id": "nfwb-2025-04-28",
+      "title": "Niagara Falls Water Board business meeting minutes, April 28, 2025",
+      "url": "https://nfwb.org/app/uploads/2025/06/Draft-April-28-2025-NFWB-Business-Meeting-Minutes.pdf",
+      "mode": "file",
+      "path": "raw/nfwb-2025-04-28.pdf",
+      "type": "pdf",
+      "note": "Peer exemplar: employee-evaluation resolution failed 2-2, was revised in public, passed 3-2; 161-minute meeting."
+    },
+    {
+      "id": "nhcrwa-2024-10-07",
+      "title": "North Harris County Regional Water Authority executed minutes, October 7, 2024",
+      "url": "https://www.nhcrwa.com/wp-content/uploads/2024/12/Executed-Minutes-10-7-24.pdf",
+      "mode": "citation",
+      "note": "Peer exemplar: motion failed 2-2 with two abstentions; 3-2 to postpone; 179-minute meeting, 9 speakers, 35-minute executive session. The authority restructured its uploads path and the original PDF URL now 404s with no Wayback snapshot; relocating the executed minutes is an open archiving item. Niagara Falls, the peer the story leads with, is captured and hashed."
+    },
+    {
+      "id": "occ-board-effectiveness",
+      "title": "OCC Comptroller's Handbook - Bank Supervision Process (board effectiveness guidance)",
+      "url": "https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/bank-supervision-process/pub-ch-bank-supervision-process.pdf",
+      "mode": "file",
+      "path": "raw/occ-bank-supervision-process.pdf",
+      "type": "pdf",
+      "note": "Approval rates approaching 99-100% may indicate a board has ceased providing active oversight and independent judgment."
+    },
+    {
+      "id": "kennesaw-enron-2024",
+      "title": "Kennesaw State analysis of 848 Enron board votes, 1997-2001",
+      "url": "https://www.kennesaw.edu/coles/research/docs/spring-2024/spring-2024-02.pdf",
+      "mode": "file",
+      "path": "raw/kennesaw-enron.pdf",
+      "type": "pdf",
+      "note": "Enron board approved 99.5% of resolutions unanimously; a questioning board can still be a rubber stamp."
+    },
+    {
+      "id": "rand-pe247-2017",
+      "title": "RAND perspective on Pittsburgh Water lead remediation options (2017)",
+      "url": "https://www.rand.org/content/dam/rand/pubs/perspectives/PE200/PE247/RAND_PE247.pdf",
+      "mode": "file",
+      "path": "raw/rand-pe247.pdf",
+      "type": "pdf",
+      "note": "Prior work by interviewed source Linnea Warren Mears."
+    },
+    {
+      "id": "pa-sunshine-act",
+      "title": "Pennsylvania Sunshine Act, 65 Pa.C.S. Chapter 7",
+      "url": "https://www.legis.state.pa.us/cfdocs/legis/LI/consCheck.cfm?txtType=HTM&ttl=65&div=0&chpt=7",
+      "mode": "citation",
+      "note": "Sections 706 and 708(c) cited for the public-deliberation requirement and the executive-session subterfuge prohibition."
+    },
+    {
+      "id": "pa-newsmedia-sunshine-guide",
+      "title": "Pennsylvania NewsMedia Association guide to the Sunshine Act",
+      "url": "https://panewsmedia.org/legal/guide-to-the-pennsylvania-sunshine-act/",
+      "mode": "citation",
+      "note": "Source for the enforcement-weakness quotes."
+    },
+    {
+      "id": "puc-rate-case-2025",
+      "title": "PA PUC press release on the Pittsburgh Water rate case (July 10, 2025)",
+      "url": "https://www.puc.pa.gov/press-release/2025/puc-to-investigate-water-wastewater-and-stormwater-rate-changes-proposed-by-the-pittsburgh-water-and-sewer-authority-07102025",
+      "mode": "citation",
+      "note": "Rate case filed June 4, 2025; decision due March 8, 2026."
+    },
+    {
+      "id": "story-baseline",
+      "title": "Two years, zero 'no' votes on Pittsburgh Water board as rate hike looms (Public Source)",
+      "url": "https://www.publicsource.org/pittsburgh-water-board-unanimous-votes-oversight/",
+      "mode": "citation",
+      "note": "The published baseline story. Byline Brian Nuckols."
+    },
+    {
+      "id": "story-followup",
+      "title": "Pittsburgh Water board asks questions after transparency investigation (Public Source)",
+      "url": "https://www.publicsource.org/pittsburgh-water-board-transparency-rate-hike/",
+      "mode": "citation",
+      "note": "The observer-effect follow-up. Byline Brian Nuckols."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.DS_Store
+~$*
+
+# Working pull of the primary Drive artifacts (the master workbook, story drafts, transcripts).
+# The archived, hashed copies that a reader verifies live in 01-sources-archive/raw/, not here.
+_source-pull/
+
+# Signing private keys never belong in the repo. Public key ships in 03-harness/.
+*.ed25519.key
+.trustless-seal/
+
+# Quarantined bad captures (bot-challenge pages, etc.); the rejection is logged in the custody chain.
+*.rejected

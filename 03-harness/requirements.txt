@@ -1,0 +1,11 @@
+# Tiered on purpose, so a reader can do the core checks with nothing but the standard library.
+#
+#   Re-hash sources + reproduce figures (verify.py, build.py, check.py):  no dependencies.
+#   Rebuild the spreadsheet workbook (make_workbook.py):                  openpyxl
+#   Re-fetch and hash sources from the web (capture.py):                  requests
+#
+# Install everything:
+#   pip install -r 03-harness/requirements.txt
+
+openpyxl>=3.1
+requests>=2.31

@@ -1,0 +1,5 @@
+utility,jurisdiction,meetings_sampled,sampling_method,votes,unanimous,contested,abstentions,unanimity_pct,longest_meeting_min,public_speakers_example,exemplar
+Pittsburgh Water,"Pittsburgh, PA",24,full census (every meeting Oct 2023-Sep 2025),228,223,0,5,100.0,NA,NA,"Zero split votes in 24 months; the 5 abstentions were Chair Sciulli's conflict-of-interest recusals, excluded from the denominator"
+Niagara Falls Water Board,"Niagara Falls, NY",3,random sample,NA,NA,NA,NA,NA,161,NA,"Apr 28 2025: employee-evaluation resolution failed 2-2, was revised in public, then passed 3-2; meeting ran 161 minutes"
+North Harris County Regional Water Authority,"North Harris County, TX",3,random sample,NA,NA,NA,NA,NA,179,9,"Oct 7 2024: a motion failed 2-2 with two abstentions, and the board voted 3-2 to postpone; 179-minute meeting, 9 public speakers, 35-minute executive session"
+Peers combined,"NY + TX",6,random sample (3 meetings per utility),29,20,9,0,69.0,NA,NA,"20 of 29 votes unanimous; 9 involved split votes, failed motions, or abstentions"
