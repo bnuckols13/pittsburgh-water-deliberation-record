@@ -1,0 +1,6 @@
+# Text is stored and checked out with LF everywhere, so build.py --check reproduces the
+# committed CSVs byte-for-byte on Windows, macOS, and Linux alike. Binaries are left alone.
+* text=auto eol=lf
+*.pdf binary
+*.xlsx binary
+*.png binary

@@ -126,7 +126,7 @@ expect("ratio to average (about 7x)", round(ratio, 1), 7.3, tol=0.3)
 # --- write the derived summary -----------------------------------------------------
 out = OUT / "headline_figures.csv"
 with open(out, "w", newline="", encoding="utf-8") as f:
-    w = csv.writer(f)
+    w = csv.writer(f, lineterminator="\n")
     w.writerow(["figure", "value", "source_file"])
     rows = [
         ("meetings_analyzed", len(meetings), "meetings.csv"),
