@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pittsburgh Water Deliberation Record — open me first</title>
+<style>
+  :root{--ink:#1a1a1a;--soft:#4a4a4a;--paper:#fbfaf7;--rule:#d9d4c8;--accent:#5b4b8a;--accent-soft:#efeaf6;--card:#fff;}
+  @media (prefers-color-scheme:dark){:root{--ink:#f4f2e9;--soft:#c3c2b7;--paper:#14130e;--rule:#332f26;--accent:#9085e9;--accent-soft:#231f33;--card:#1e1d16;}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,"Palatino Linotype",serif;line-height:1.6}
+  .wrap{max-width:52rem;margin:0 auto;padding:3rem 1.4rem 5rem}
+  .kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 .4rem}
+  h1{font-size:2rem;line-height:1.15;margin:0 0 .3rem;letter-spacing:-.01em}
+  .sub{color:var(--soft);font-style:italic;margin:0 0 2rem}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  a.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:1.1rem 1.2rem;transition:transform .1s,border-color .1s}
+  a.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+  a.card.big{grid-column:1/-1;background:var(--accent-soft);border-color:var(--accent)}
+  .card h2{font-family:-apple-system,system-ui,sans-serif;font-size:1.05rem;margin:0 0 .25rem}
+  .card.big h2{font-size:1.3rem}
+  .card p{font-size:.88rem;color:var(--soft);margin:0}
+  .card .go{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--accent);margin-top:.5rem;display:inline-block}
+  h3.sec{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--soft);margin:2rem 0 .7rem}
+  ul.docs{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:.4rem 1.5rem}
+  @media(max-width:600px){ul.docs{grid-template-columns:1fr}}
+  ul.docs a{color:var(--accent);text-decoration:none;font-family:-apple-system,system-ui,sans-serif;font-size:.9rem}
+  ul.docs a:hover{text-decoration:underline}
+  .check{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:1rem 1.2rem;margin-top:1.5rem;font-size:.9rem}
+  code{font-family:"Cascadia Code",Consolas,monospace;background:var(--accent-soft);padding:.1rem .4rem;border-radius:4px;font-size:.85em}
+  .foot{color:var(--soft);font-size:.82rem;margin-top:2rem;border-top:1px solid var(--rule);padding-top:1rem;font-family:-apple-system,system-ui,sans-serif}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Open me first</p>
+  <h1>The Pittsburgh Water Deliberation Record</h1>
+  <p class="sub">Everything in the package, one click away. Reporting and data by Brian Nuckols for Public Source.</p>
+
+  <div class="grid">
+    <a class="card big" href="site/index.html">
+      <h2>▶ The showcase</h2>
+      <p>Start here. The full story — 228 votes, not one dissent — with the charts and the peer app built in. This is the piece to send an editor.</p>
+      <span class="go">Open the showcase →</span>
+    </a>
+
+    <a class="card" href="04-charts/index.html">
+      <h2>The charts</h2>
+      <p>Five charts: the unbroken record, the 40-question spike, $871M, the peer gap, who asked.</p>
+      <span class="go">Open →</span>
+    </a>
+
+    <a class="card" href="widget/index.html">
+      <h2>The peer app</h2>
+      <p>The empirical test, board by board. Pittsburgh Water against Niagara Falls and North Harris County.</p>
+      <span class="go">Open →</span>
+    </a>
+
+    <a class="card" href="05-sources/index.html">
+      <h2>The sourcing</h2>
+      <p>Nine named human sources, organized by role, each with the claims they carry. One full transcript included.</p>
+      <span class="go">Open →</span>
+    </a>
+
+    <a class="card" href="spreadsheet/Pittsburgh-Water-Deliberation-Record.xlsx">
+      <h2>The spreadsheet</h2>
+      <p>The Open the Books–style workbook: six tabs, from the meeting census to the sources. Downloads.</p>
+      <span class="go">Download the .xlsx →</span>
+    </a>
+  </div>
+
+  <h3 class="sec">The written record</h3>
+  <ul class="docs">
+    <li><a href="README.md">README — the reader contract</a></li>
+    <li><a href="FACT-CHECK.md">FACT-CHECK — every figure, traced</a></li>
+    <li><a href="METHODOLOGY.md">METHODOLOGY — the codebook</a></li>
+    <li><a href="PORTABILITY.md">PORTABILITY — run it on any board</a></li>
+    <li><a href="START-HERE.md">START-HERE — orientation</a></li>
+    <li><a href="01-sources-archive/PROVENANCE.md">PROVENANCE — where each source came from</a></li>
+  </ul>
+
+  <div class="check">
+    <b>Check the work.</b> Nothing here asks for trust. From the package folder:
+    <br><code>python 03-harness/check.py</code>
+    <br>It re-hashes every archived source and recomputes 228, 223, $871.25M, and the 69% peer rate, then prints one verdict.
+  </div>
+
+  <p class="foot">If the links above do not open, you are viewing this file directly. Run <code>view.bat</code> (double-click it) or <code>python -m http.server</code> in this folder, then open <code>http://127.0.0.1:8137/</code>. The Markdown docs render best on GitHub; locally they open as plain text.</p>
+</div>
+</body>
+</html>
