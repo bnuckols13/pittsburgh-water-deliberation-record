@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pittsburgh Water board — the charts</title>
+<style>
+  :root{
+    --surface:#fbfaf7; --plane:#f4f2ea; --ink:#1a1908; --secondary:#52514e; --muted:#898781;
+    --grid:#e6e3da; --axis:#c3c2b7; --s1:#2a78d6; --s2:#eb6834; --dissent:#d03b3b; --accent:#5b4b8a;
+    --border:rgba(11,11,11,.10);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --surface:#16150f; --plane:#0d0d0a; --ink:#f4f2e9; --secondary:#c3c2b7; --muted:#8f8d86;
+      --grid:#2c2c2a; --axis:#383835; --s1:#3987e5; --s2:#d95926; --dissent:#e05a5a; --accent:#9085e9;
+      --border:rgba(255,255,255,.12); }
+  }
+  :root[data-theme="dark"]{ --surface:#16150f; --plane:#0d0d0a; --ink:#f4f2e9; --secondary:#c3c2b7; --muted:#8f8d86; --grid:#2c2c2a; --axis:#383835; --s1:#3987e5; --s2:#d95926; --dissent:#e05a5a; --accent:#9085e9; --border:rgba(255,255,255,.12); }
+  :root[data-theme="light"]{ --surface:#fbfaf7; --plane:#f4f2ea; --ink:#1a1908; --secondary:#52514e; --muted:#898781; --grid:#e6e3da; --axis:#c3c2b7; --s1:#2a78d6; --s2:#eb6834; --dissent:#d03b3b; --accent:#5b4b8a; --border:rgba(11,11,11,.10); }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--plane);color:var(--ink);line-height:1.5;padding:2rem 1rem}
+  .wrap{max-width:52rem;margin:0 auto}
+  h1{font-size:1.5rem;font-weight:650;letter-spacing:-.01em;margin:0 0 .25rem}
+  .sub{color:var(--secondary);margin:0 0 2rem;font-size:.95rem}
+  figure{margin:0 0 2.25rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.15rem 1rem}
+  figcaption{font-weight:600;font-size:1.02rem;margin-bottom:.15rem}
+  .note{color:var(--secondary);font-size:.85rem;margin:.1rem 0 .7rem}
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.8rem;color:var(--secondary);margin-top:.55rem}
+  .legend span{display:inline-flex;align-items:center;gap:.35rem}
+  .swatch{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .tick{fill:var(--muted);font-size:11px}
+  .vlabel{fill:var(--ink);font-size:11px;font-weight:600}
+  .axis-line{stroke:var(--axis);stroke-width:1}
+  .grid-line{stroke:var(--grid);stroke-width:1}
+  details{margin-top:.6rem;font-size:.82rem;color:var(--secondary)}
+  summary{cursor:pointer;color:var(--accent)}
+  table{border-collapse:collapse;margin-top:.5rem;font-size:.8rem;width:100%}
+  th,td{text-align:right;padding:.2rem .5rem;border-bottom:1px solid var(--grid);font-variant-numeric:tabular-nums}
+  th:first-child,td:first-child{text-align:left}
+  .tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);font-size:.76rem;
+    padding:.3rem .5rem;border-radius:6px;opacity:0;transition:opacity .08s;z-index:9;white-space:nowrap;transform:translate(-50%,-130%)}
+  .theme-btn{position:fixed;top:.6rem;right:.6rem;font:inherit;font-size:.78rem;background:var(--surface);
+    color:var(--secondary);border:1px solid var(--border);border-radius:6px;padding:.25rem .6rem;cursor:pointer}
+  .src{color:var(--muted);font-size:.78rem;margin-top:2rem;border-top:1px solid var(--grid);padding-top:.8rem}
+</style>
+</head>
+<body>
+<button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark">◐ theme</button>
+<div class="wrap">
+  <h1>Two years of the Pittsburgh Water board, in five charts</h1>
+  <p class="sub">Every resolution the board voted, October 2023 to September 2025, coded from the official minutes. Figures reproduce from the archived data with <code>python 03-harness/build.py</code>. Reporting by Brian Nuckols for Public Source.</p>
+
+  <figure><figcaption>228 decisions, not one dissent</figcaption>
+    <p class="note">Resolutions accumulate to 228 over 24 meetings; the count of no votes never leaves zero.</p>
+    <div id="c1"></div>
+    <div class="legend"><span><i class="swatch" style="background:var(--s1)"></i>Resolutions voted (cumulative)</span><span><i class="swatch" style="background:var(--dissent)"></i>No votes (cumulative)</span></div>
+    <details><summary>Show data</summary><div id="t1"></div></details>
+  </figure>
+
+  <figure><figcaption>The board asked 40 questions the meeting after the story ran</figcaption>
+    <p class="note">Board questions per meeting held near an average of 5.5 for two years, then jumped to about seven times that at the first meeting after the investigation published.</p>
+    <div id="c2"></div>
+    <div class="legend"><span><i class="swatch" style="background:var(--s1)"></i>Questions per meeting</span><span><i class="swatch" style="background:var(--s2)"></i>First post-publication meeting</span><span><i class="swatch" style="background:var(--accent)"></i>24-month average (5.5)</span></div>
+    <details><summary>Show data</summary><div id="t2"></div></details>
+  </figure>
+
+  <figure><figcaption>$871 million authorized along the way</figcaption>
+    <p class="note">Cumulative spending the board approved across the same 24 meetings, in millions of dollars.</p>
+    <div id="c3"></div>
+    <details><summary>Show data</summary><div id="t3"></div></details>
+  </figure>
+
+  <figure><figcaption>100% unanimous, against 69% at the peer boards</figcaption>
+    <p class="note">Pittsburgh Water was unanimous on every vote where all members voted. At two peer water boards, sampled at random over the same window, 20 of 29 votes were unanimous.</p>
+    <div id="c4"></div>
+    <details><summary>Show data</summary><div id="t4"></div></details>
+  </figure>
+
+  <figure><figcaption>Who did the asking</figcaption>
+    <p class="note">Of 131 questions counted across the two years, the chair asked more than a third; one member asked one.</p>
+    <div id="c5"></div>
+    <details><summary>Show data</summary><div id="t5"></div></details>
+  </figure>
+
+  <p class="src">Source: Pittsburgh Water board minutes (24 meetings, Oct 2023–Sep 2025), coded by the reporter; peer minutes from the Niagara Falls Water Board and North Harris County Regional Water Authority. Data and reproduction harness: this repository. No figure here uses the coin-flip probability the published story correctly cut.</p>
+</div>
+
+<div class="tip" id="tip"></div>
+<script>
+const tip=document.getElementById('tip');
+function showTip(e,html){tip.innerHTML=html;tip.style.left=e.clientX+'px';tip.style.top=e.clientY+'px';tip.style.opacity=1;}
+function hideTip(){tip.style.opacity=0;}
+const NS='http://www.w3.org/2000/svg';
+function el(n,a){const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function table(id,head,rows){
+  let h='<table><thead><tr>'+head.map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>';
+  h+=rows.map(r=>'<tr>'+r.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('');
+  document.getElementById(id).innerHTML=h+'</tbody></table>';
+}
+
+// --- data ---------------------------------------------------------------
+const meetings=[
+ ["2023-10-27",12,7,76.58],["2023-11-17",16,5,17.58],["2023-12-15",16,3,34.29],["2024-01-26",2,0,5.26],
+ ["2024-02-23",10,1,20.42],["2024-03-22",7,7,5.34],["2024-04-26",11,8,31.56],["2024-05-24",10,4,60.08],
+ ["2024-06-28",6,7,10.80],["2024-07-26",2,6,5.18],["2024-08-23",4,3,4.19],["2024-09-27",7,4,8.66],
+ ["2024-10-25",9,11,28.79],["2024-11-22",8,10,13.64],["2024-12-20",11,7,9.92],["2025-01-24",7,5,46.94],
+ ["2025-02-28",16,9,33.22],["2025-03-28",10,5,113.18],["2025-04-25",17,3,245.38],["2025-05-23",5,1,7.04],
+ ["2025-06-27",10,5,18.14],["2025-07-25",12,5,46.54],["2025-08-22",13,8,13.54],["2025-09-26",7,7,14.98]];
+const members=[["Sciulli (Chair)",47],["Domach",27],["Leber",20],["Martin",13],["Strassburger (VC)",11],["McCormick Barron",8],["Bey",4],["Murrell",1]];
+const W=680, H=240, PL=44, PR=16, PT=16, PB=34;
+
+// --- chart 1: cumulative resolutions vs cumulative dissent --------------
+(function(){
+  const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Cumulative resolutions rising to 228 while cumulative no votes stay at zero'});
+  let cum=0; const pts=meetings.map((m,i)=>{cum+=m[1];return [i,cum];});
+  const maxY=228, X=i=>PL+(W-PL-PR)*i/(meetings.length-1), Y=v=>H-PB-(H-PT-PB)*v/maxY;
+  [0,57,114,171,228].forEach(v=>{svg.appendChild(el('line',{class:'grid-line',x1:PL,x2:W-PR,y1:Y(v),y2:Y(v)}));
+    const t=el('text',{class:'tick',x:PL-6,y:Y(v)+4,'text-anchor':'end'});t.textContent=v;svg.appendChild(t);});
+  svg.appendChild(el('line',{class:'axis-line',x1:PL,x2:W-PR,y1:Y(0),y2:Y(0)}));
+  // dissent line flat at 0
+  svg.appendChild(el('line',{x1:X(0),y1:Y(0),x2:X(meetings.length-1),y2:Y(0),stroke:'var(--dissent)','stroke-width':2}));
+  // resolutions cumulative
+  let d='M'+pts.map(p=>`${X(p[0])},${Y(p[1])}`).join(' L');
+  svg.appendChild(el('path',{d,fill:'none',stroke:'var(--s1)','stroke-width':2}));
+  pts.forEach((p,i)=>{const c=el('circle',{cx:X(p[0]),cy:Y(p[1]),r:3.2,fill:'var(--s1)'});
+    c.addEventListener('mousemove',e=>showTip(e,`${meetings[i][0]}<br>${p[1]} resolutions · 0 no votes`));
+    c.addEventListener('mouseleave',hideTip);svg.appendChild(c);});
+  const lab=el('text',{class:'vlabel',x:X(pts.length-1)-2,y:Y(228)-8,'text-anchor':'end'});lab.textContent='228';svg.appendChild(lab);
+  const z=el('text',{class:'vlabel',x:X(pts.length-1)-2,y:Y(0)-6,'text-anchor':'end',fill:'var(--dissent)'});z.textContent='0 no votes';svg.appendChild(z);
+  document.getElementById('c1').appendChild(svg);
+  table('t1',['Meeting','Cumulative resolutions','Cumulative no votes'],pts.map((p,i)=>[meetings[i][0],p[1],0]));
+})();
+
+// --- chart 2: questions per meeting + follow-up spike -------------------
+(function(){
+  const data=meetings.map(m=>m[2]).concat([40]);
+  const labels=meetings.map(m=>m[0].slice(2)).concat(['post-pub']);
+  const avg=5.46, maxY=40;
+  const bw=(W-PL-PR)/data.length*0.72, gap=(W-PL-PR)/data.length;
+  const Y=v=>H-PB-(H-PT-PB)*v/maxY;
+  const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Questions per meeting near five for two years then forty at the first post-publication meeting'});
+  [0,10,20,30,40].forEach(v=>{svg.appendChild(el('line',{class:'grid-line',x1:PL,x2:W-PR,y1:Y(v),y2:Y(v)}));
+    const t=el('text',{class:'tick',x:PL-6,y:Y(v)+4,'text-anchor':'end'});t.textContent=v;svg.appendChild(t);});
+  data.forEach((v,i)=>{const x=PL+gap*i+(gap-bw)/2, h=Y(0)-Y(v), last=i===data.length-1;
+    const r=el('rect',{x,y:Y(v),width:bw,height:Math.max(h,0),rx:3,fill:last?'var(--s2)':'var(--s1)'});
+    r.addEventListener('mousemove',e=>showTip(e,`${last?'First post-publication meeting':meetings[i][0]}<br>${v} questions`));
+    r.addEventListener('mouseleave',hideTip);svg.appendChild(r);});
+  // average line
+  svg.appendChild(el('line',{x1:PL,x2:W-PR,y1:Y(avg),y2:Y(avg),stroke:'var(--accent)','stroke-width':1.5,'stroke-dasharray':'4 3'}));
+  const al=el('text',{class:'tick',x:W-PR,y:Y(avg)-4,'text-anchor':'end',fill:'var(--accent)'});al.textContent='avg 5.5';svg.appendChild(al);
+  const sp=el('text',{class:'vlabel',x:PL+gap*(data.length-1)+gap/2,y:Y(40)-6,'text-anchor':'middle',fill:'var(--s2)'});sp.textContent='40';svg.appendChild(sp);
+  svg.appendChild(el('line',{class:'axis-line',x1:PL,x2:W-PR,y1:Y(0),y2:Y(0)}));
+  document.getElementById('c2').appendChild(svg);
+  table('t2',['Meeting','Questions'],meetings.map(m=>[m[0],m[2]]).concat([['First post-publication meeting',40]]));
+})();
+
+// --- chart 3: cumulative spending --------------------------------------
+(function(){
+  let cum=0; const pts=meetings.map((m,i)=>{cum+=m[3];return [i,cum];});
+  const maxY=900, X=i=>PL+(W-PL-PR)*i/(meetings.length-1), Y=v=>H-PB-(H-PT-PB)*v/maxY;
+  const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Cumulative spending authorized rising to 871 million dollars'});
+  [0,300,600,900].forEach(v=>{svg.appendChild(el('line',{class:'grid-line',x1:PL,x2:W-PR,y1:Y(v),y2:Y(v)}));
+    const t=el('text',{class:'tick',x:PL-6,y:Y(v)+4,'text-anchor':'end'});t.textContent='$'+v+'M';svg.appendChild(t);});
+  let area='M'+X(0)+','+Y(0)+' L'+pts.map(p=>`${X(p[0])},${Y(p[1])}`).join(' L')+` L${X(pts.length-1)},${Y(0)} Z`;
+  svg.appendChild(el('path',{d:area,fill:'var(--s1)','fill-opacity':.13}));
+  svg.appendChild(el('path',{d:'M'+pts.map(p=>`${X(p[0])},${Y(p[1])}`).join(' L'),fill:'none',stroke:'var(--s1)','stroke-width':2}));
+  pts.forEach((p,i)=>{const c=el('circle',{cx:X(p[0]),cy:Y(p[1]),r:2.6,fill:'var(--s1)'});
+    c.addEventListener('mousemove',e=>showTip(e,`${meetings[i][0]}<br>$${p[1].toFixed(2)}M cumulative`));
+    c.addEventListener('mouseleave',hideTip);svg.appendChild(c);});
+  const lab=el('text',{class:'vlabel',x:X(pts.length-1)-2,y:Y(871.25)-8,'text-anchor':'end'});lab.textContent='$871.25M';svg.appendChild(lab);
+  svg.appendChild(el('line',{class:'axis-line',x1:PL,x2:W-PR,y1:Y(0),y2:Y(0)}));
+  document.getElementById('c3').appendChild(svg);
+  table('t3',['Meeting','Cumulative $M'],pts.map((p,i)=>[meetings[i][0],'$'+p[1].toFixed(2)]));
+})();
+
+// --- chart 4: peer comparison ------------------------------------------
+(function(){
+  const rows=[["Pittsburgh Water",100,'var(--s1)','223 of 223 votes (all-member), 0 split in 24 months'],
+              ["Peer boards (NY + TX)",69,'var(--s2)','20 of 29 sampled votes unanimous; 9 contested']];
+  const w=680,h=120,pl=170,pr=54,gap=26,bh=30;
+  const X=v=>pl+(w-pl-pr)*v/100;
+  const svg=el('svg',{viewBox:`0 0 ${w} ${h}`,role:'img','aria-label':'Pittsburgh Water 100 percent unanimous versus 69 percent at peer boards'});
+  [0,25,50,75,100].forEach(v=>{svg.appendChild(el('line',{class:'grid-line',x1:X(v),x2:X(v),y1:8,y2:h-24}));
+    const t=el('text',{class:'tick',x:X(v),y:h-8,'text-anchor':'middle'});t.textContent=v+'%';svg.appendChild(t);});
+  rows.forEach((r,i)=>{const y=16+i*(bh+gap);
+    const lb=el('text',{class:'vlabel',x:pl-10,y:y+bh/2+4,'text-anchor':'end'});lb.textContent=r[0];svg.appendChild(lb);
+    const bar=el('rect',{x:pl,y,width:Math.max(X(r[1])-pl,0),height:bh,rx:4,fill:r[2]});
+    bar.addEventListener('mousemove',e=>showTip(e,`${r[0]}<br>${r[1]}% unanimous · ${r[3]}`));bar.addEventListener('mouseleave',hideTip);svg.appendChild(bar);
+    const vl=el('text',{class:'vlabel',x:X(r[1])+6,y:y+bh/2+4});vl.textContent=r[1]+'%';svg.appendChild(vl);});
+  document.getElementById('c4').appendChild(svg);
+  table('t4',['Board','Unanimity','Basis'],rows.map(r=>[r[0],r[1]+'%',r[3]]));
+})();
+
+// --- chart 5: questions by member --------------------------------------
+(function(){
+  const w=680,pl=150,pr=40,bh=22,gap=8,top=8;
+  const h=top+members.length*(bh+gap);
+  const max=47, X=v=>pl+(w-pl-pr)*v/max;
+  const svg=el('svg',{viewBox:`0 0 ${w} ${h}`,role:'img','aria-label':'Questions asked by each board member, chair highest at 47'});
+  members.forEach((m,i)=>{const y=top+i*(bh+gap);
+    const lb=el('text',{class:'vlabel',x:pl-10,y:y+bh/2+4,'text-anchor':'end'});lb.textContent=m[0];svg.appendChild(lb);
+    const bar=el('rect',{x:pl,y,width:Math.max(X(m[1])-pl,0),height:bh,rx:3.5,fill:'var(--s1)'});
+    const pct=Math.round(m[1]/131*100);
+    bar.addEventListener('mousemove',e=>showTip(e,`${m[0]}<br>${m[1]} questions · ${pct}%`));bar.addEventListener('mouseleave',hideTip);svg.appendChild(bar);
+    const vl=el('text',{class:'vlabel',x:X(m[1])+6,y:y+bh/2+4});vl.textContent=m[1];svg.appendChild(vl);});
+  document.getElementById('c5').appendChild(svg);
+  table('t5',['Member','Questions','Share of 131'],members.map(m=>[m[0],m[1],Math.round(m[1]/131*100)+'%']));
+})();
+
+// theme toggle
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  const r=document.documentElement, cur=r.getAttribute('data-theme');
+  const dark=cur? cur==='dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+  r.setAttribute('data-theme',dark?'light':'dark');
+});
+</script>
+</body>
+</html>

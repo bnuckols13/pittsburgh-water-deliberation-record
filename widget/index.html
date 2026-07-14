@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The peer test — how Pittsburgh Water's board compares</title>
+<style>
+  :root{
+    --surface:#fbfaf7;--plane:#f4f2ea;--card:#ffffff;--ink:#1a1908;--secondary:#52514e;--muted:#898781;
+    --grid:#e6e3da;--s1:#2a78d6;--s2:#eb6834;--dissent:#d03b3b;--accent:#5b4b8a;--border:rgba(11,11,11,.10);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root{--surface:#16150f;--plane:#0d0d0a;--card:#1e1d16;--ink:#f4f2e9;--secondary:#c3c2b7;--muted:#8f8d86;--grid:#2c2c2a;--s1:#3987e5;--s2:#d95926;--dissent:#e05a5a;--accent:#9085e9;--border:rgba(255,255,255,.12);}}
+  :root[data-theme="dark"]{--surface:#16150f;--plane:#0d0d0a;--card:#1e1d16;--ink:#f4f2e9;--secondary:#c3c2b7;--muted:#8f8d86;--grid:#2c2c2a;--s1:#3987e5;--s2:#d95926;--dissent:#e05a5a;--accent:#9085e9;--border:rgba(255,255,255,.12);}
+  :root[data-theme="light"]{--surface:#fbfaf7;--plane:#f4f2ea;--card:#ffffff;--ink:#1a1908;--secondary:#52514e;--muted:#898781;--grid:#e6e3da;--s1:#2a78d6;--s2:#eb6834;--dissent:#d03b3b;--accent:#5b4b8a;--border:rgba(11,11,11,.10);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--plane);color:var(--ink);line-height:1.5;padding:1.5rem 1rem}
+  .wrap{max-width:50rem;margin:0 auto}
+  h1{font-size:1.4rem;font-weight:650;letter-spacing:-.01em;margin:0 0 .3rem}
+  .lede{color:var(--secondary);font-size:.95rem;margin:0 0 1.2rem}
+  .method{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+    border-radius:8px;padding:.7rem .9rem;font-size:.85rem;color:var(--secondary);margin-bottom:1.3rem}
+  .switch{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+  .switch button{font:inherit;font-size:.85rem;padding:.4rem .8rem;border-radius:20px;border:1px solid var(--border);
+    background:var(--surface);color:var(--secondary);cursor:pointer}
+  .switch button[aria-pressed="true"]{background:var(--s2);color:#fff;border-color:var(--s2)}
+  .panel{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.1rem}
+  @media(max-width:560px){.panel{grid-template-columns:1fr}}
+  .board{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.1rem}
+  .board h2{font-size:1.05rem;margin:0 0 .15rem}
+  .board .where{color:var(--muted);font-size:.8rem;margin:0 0 .8rem}
+  .board.anchor{border-top:3px solid var(--s1)}
+  .board.peer{border-top:3px solid var(--s2)}
+  .metric{margin:.7rem 0}
+  .metric .k{font-size:.78rem;color:var(--secondary);display:flex;justify-content:space-between;margin-bottom:.25rem}
+  .metric .v{font-weight:650;font-variant-numeric:tabular-nums}
+  .track{height:9px;background:var(--grid);border-radius:6px;overflow:hidden}
+  .fill{height:100%;border-radius:6px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+  .exemplar{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.75rem .9rem;font-size:.88rem;margin-top:.4rem}
+  .exemplar strong{color:var(--ink)}
+  .verdict{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;font-size:.92rem;margin-top:.3rem}
+  .verdict b{color:var(--ink)}
+  .foot{color:var(--muted);font-size:.78rem;margin-top:1.3rem;border-top:1px solid var(--grid);padding-top:.7rem}
+  .theme-btn{position:fixed;top:.6rem;right:.6rem;font:inherit;font-size:.78rem;background:var(--surface);
+    color:var(--secondary);border:1px solid var(--border);border-radius:6px;padding:.25rem .6rem;cursor:pointer}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<button class="theme-btn" id="themeBtn">◐ theme</button>
+<div class="wrap">
+  <h1>The peer test</h1>
+  <p class="lede">A board that never splits could be efficient, or it could be a rubber stamp. The way to tell the difference is to watch comparable boards. So the investigation coded peer water boards the same way it coded Pittsburgh Water, and let the contrast do the arguing.</p>
+
+  <div class="method"><b>Method.</b> Pittsburgh Water is the full census: every vote at all 24 board meetings, October 2023 to September 2025. For the peers, a random-number generator picked three meetings from each board over the same window; every vote in those meetings was coded on the same four variables. Six peer meetings produced 29 votes. Pick a peer to see the head-to-head.</div>
+
+  <div class="switch" id="switch" role="group" aria-label="Choose a peer board"></div>
+
+  <div class="panel" id="panel"></div>
+
+  <div class="verdict" id="verdict"></div>
+
+  <p class="foot">Peer minutes: Niagara Falls Water Board (Apr 28, 2025, archived and hashed in this repository) and North Harris County Regional Water Authority (Oct 7, 2024). The combined peer figure — 20 of 29 votes unanimous — is the published comparison; per-board vote splits are a pending archiving item. This tool carries no coin-flip probability; the published story cut that framing, correctly. To extend the test to another board, add it to the <code>BOARDS</code> array. Reporting by Brian Nuckols for Public Source.</p>
+</div>
+
+<script>
+const PGH={name:"Pittsburgh Water",where:"Pittsburgh, PA — full census, 24 meetings",
+  unanimity:100, contested:0, contestedOf:228, longest:null, speakers:10, speakersWin:"5 of 24 meetings",
+  note:"228 resolutions, 223 unanimous, zero no votes, five conflict-of-interest recusals."};
+const BOARDS=[
+ {id:"nfwb",name:"Niagara Falls Water Board",where:"Niagara Falls, NY — 3 meetings, random sample",
+   unanimity:null, contested:null, longest:161,
+   exemplar:"<strong>April 28, 2025.</strong> A resolution on employee-evaluation policy failed on a 2-2 vote. Board members revised it in the open, then passed it 3-2. The meeting ran 161 minutes.",
+   pairNote:"Where Pittsburgh Water recorded no split in two years, this board split, rewrote, and re-voted in a single evening."},
+ {id:"nhcrwa",name:"North Harris County RWA",where:"North Harris County, TX — 3 meetings, random sample",
+   unanimity:null, contested:null, longest:179,
+   exemplar:"<strong>October 7, 2024.</strong> A motion failed 2-2 with two abstentions; the board then voted 3-2 to postpone a consultant contract. The 179-minute meeting drew nine public speakers and included a 35-minute executive session.",
+   pairNote:"Nine residents spoke at one peer meeting — nearly the ten who addressed Pittsburgh Water across two years."},
+ {id:"combined",name:"Peer boards combined",where:"NY + TX — 6 meetings, 29 votes",
+   unanimity:69, contested:9, contestedOf:29, longest:179,
+   exemplar:"Across six randomly-selected peer meetings, 20 of 29 votes were unanimous. The other nine were split votes, failed motions, or abstentions reflecting genuine division.",
+   pairNote:"69% unanimous at the peers; 100% at Pittsburgh Water."}
+];
+
+const $=s=>document.querySelector(s);
+let active=BOARDS[2];
+
+function bar(label,val,max,unit,color){
+  const pct=val==null?0:Math.min(100,val/max*100);
+  const shown=val==null?"—":val+(unit||"");
+  return `<div class="metric"><div class="k"><span>${label}</span><span class="v">${shown}</span></div>
+    <div class="track"><div class="fill" style="width:${pct}%;background:${color}"></div></div></div>`;
+}
+function boardCard(b,anchor){
+  const cls=anchor?"anchor":"peer", col=anchor?"var(--s1)":"var(--s2)";
+  let m="";
+  m+=bar("Unanimity rate", b.unanimity, 100, "%", col);
+  if(anchor) m+=bar("Split votes", b.contested, 12, "", col);
+  else if(b.contested!=null) m+=bar("Contested votes", b.contested, 12, "", col);
+  if(b.longest!=null) m+=bar("Longest meeting", b.longest, 200, " min", col);
+  if(b.speakers!=null) m+=bar("Public speakers", b.speakers, 12, "", col);
+  return `<div class="board ${cls}"><h2>${b.name}</h2><p class="where">${b.where}</p>${m}
+    <div class="exemplar">${b.exemplar||b.note}</div></div>`;
+}
+function render(){
+  $("#panel").innerHTML=boardCard(PGH,true)+boardCard(active,false);
+  $("#verdict").innerHTML=`<b>${active.name}:</b> ${active.pairNote}`;
+  // retrigger the width transition
+  requestAnimationFrame(()=>document.querySelectorAll('.fill').forEach(f=>{const w=f.style.width;f.style.width='0';requestAnimationFrame(()=>f.style.width=w);}));
+}
+function buildSwitch(){
+  $("#switch").innerHTML=BOARDS.map(b=>`<button data-id="${b.id}" aria-pressed="${b===active}">${b.name}</button>`).join('');
+  $("#switch").querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
+    active=BOARDS.find(b=>b.id===btn.dataset.id);
+    $("#switch").querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.id===active.id));
+    render();
+  }));
+}
+buildSwitch();render();
+$("#themeBtn").addEventListener('click',()=>{const r=document.documentElement,c=r.getAttribute('data-theme');
+  const d=c?c==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.setAttribute('data-theme',d?'light':'dark');});
+</script>
+</body>
+</html>
