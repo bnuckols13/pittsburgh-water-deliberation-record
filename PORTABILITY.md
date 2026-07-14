@@ -1,4 +1,4 @@
-# Portability — running this instrument on any board
+# Portability: running this instrument on any board
 
 Pittsburgh has dozens of appointed boards that spend public money with almost no elected oversight:
 the airport authority, the transit authority, the redevelopment authority, the sanitary authority,

@@ -3,7 +3,7 @@
 A reproducible archive behind two published Public Source stories about the board that governs
 water and sewer service for 300,000 people in Pittsburgh. Every figure the stories reported can be
 recomputed here from coded data, and every coded figure traces to an archived, hashed source. You
-do not have to trust the reporter. You can run the check.
+do not have to trust the reporter; you can run the check.
 
 Reporting by Brian Nuckols for Public Source:
 

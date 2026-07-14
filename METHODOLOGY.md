@@ -44,8 +44,8 @@ so a reader can weigh it.
 ## The peer design
 
 A single board's unanimity means little without a baseline. To build one, a random-number generator
-selected three meetings from each of two comparable water boards — the Niagara Falls Water Board in
-New York and the North Harris County Regional Water Authority in Texas — over the same 24-month
+selected three meetings from each of two comparable water boards, the Niagara Falls Water Board in
+New York and the North Harris County Regional Water Authority in Texas, over the same 24-month
 window. Every vote in those six meetings was coded on the same four variables. The peers were chosen
 as governance analogues: appointed boards overseeing mid-size public water utilities. Random meeting
 selection guards against cherry-picking the peers' most contentious sessions. Six meetings produced

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The peer test — how Pittsburgh Water's board compares</title>
+<title>The peer test: how Pittsburgh Water's board compares</title>
 <style>
   :root{
     --surface:#fbfaf7;--plane:#f4f2ea;--card:#ffffff;--ink:#1a1908;--secondary:#52514e;--muted:#898781;
@@ -60,23 +60,23 @@
 
   <div class="verdict" id="verdict"></div>
 
-  <p class="foot">Peer minutes: Niagara Falls Water Board (Apr 28, 2025, archived and hashed in this repository) and North Harris County Regional Water Authority (Oct 7, 2024). The combined peer figure — 20 of 29 votes unanimous — is the published comparison; per-board vote splits are a pending archiving item. This tool carries no coin-flip probability; the published story cut that framing, correctly. To extend the test to another board, add it to the <code>BOARDS</code> array. Reporting by Brian Nuckols for Public Source.</p>
+  <p class="foot">Peer minutes: Niagara Falls Water Board (Apr 28, 2025, archived and hashed in this repository) and North Harris County Regional Water Authority (Oct 7, 2024). The combined peer figure, 20 of 29 votes unanimous, is the published comparison; per-board vote splits are a pending archiving item. This tool carries no coin-flip probability; the published story cut that framing, correctly. To extend the test to another board, add it to the <code>BOARDS</code> array. Reporting by Brian Nuckols for Public Source.</p>
 </div>
 
 <script>
-const PGH={name:"Pittsburgh Water",where:"Pittsburgh, PA — full census, 24 meetings",
+const PGH={name:"Pittsburgh Water",where:"Pittsburgh, PA · full census, 24 meetings",
   unanimity:100, contested:0, contestedOf:228, longest:null, speakers:10, speakersWin:"5 of 24 meetings",
   note:"228 resolutions, 223 unanimous, zero no votes, five conflict-of-interest recusals."};
 const BOARDS=[
- {id:"nfwb",name:"Niagara Falls Water Board",where:"Niagara Falls, NY — 3 meetings, random sample",
+ {id:"nfwb",name:"Niagara Falls Water Board",where:"Niagara Falls, NY · 3 meetings, random sample",
    unanimity:null, contested:null, longest:161,
    exemplar:"<strong>April 28, 2025.</strong> A resolution on employee-evaluation policy failed on a 2-2 vote. Board members revised it in the open, then passed it 3-2. The meeting ran 161 minutes.",
    pairNote:"Where Pittsburgh Water recorded no split in two years, this board split, rewrote, and re-voted in a single evening."},
- {id:"nhcrwa",name:"North Harris County RWA",where:"North Harris County, TX — 3 meetings, random sample",
+ {id:"nhcrwa",name:"North Harris County RWA",where:"North Harris County, TX · 3 meetings, random sample",
    unanimity:null, contested:null, longest:179,
    exemplar:"<strong>October 7, 2024.</strong> A motion failed 2-2 with two abstentions; the board then voted 3-2 to postpone a consultant contract. The 179-minute meeting drew nine public speakers and included a 35-minute executive session.",
-   pairNote:"Nine residents spoke at one peer meeting — nearly the ten who addressed Pittsburgh Water across two years."},
- {id:"combined",name:"Peer boards combined",where:"NY + TX — 6 meetings, 29 votes",
+   pairNote:"Nine residents spoke at one peer meeting, nearly the ten who addressed Pittsburgh Water across two years."},
+ {id:"combined",name:"Peer boards combined",where:"NY + TX · 6 meetings, 29 votes",
    unanimity:69, contested:9, contestedOf:29, longest:179,
    exemplar:"Across six randomly-selected peer meetings, 20 of 29 votes were unanimous. The other nine were split votes, failed motions, or abstentions reflecting genuine division.",
    pairNote:"69% unanimous at the peers; 100% at Pittsburgh Water."}

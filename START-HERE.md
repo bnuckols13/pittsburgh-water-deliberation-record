@@ -25,5 +25,5 @@ minutes.
 
 **If you are checking a number against the stories**, read `FACT-CHECK.md` first. It maps every
 published figure to its source and reconciles the three places the underlying data disagrees with
-itself. The circulating draft figures — 218 resolutions, 215 unanimous, $1.78 billion — are wrong;
-the published figures are 228, 223, and $871.25 million.
+itself. The circulating draft figures are wrong: 218 resolutions, 215 unanimous, $1.78 billion.
+The published figures are 228, 223, and $871.25 million.

@@ -44,7 +44,7 @@ drew a question" uses the resolution-attributed count; the per-member portraits 
 third of all questions") use the per-meeting count. `build.py` checks both totals against their own
 definitions so neither can quietly change.
 
-**2. Unquestioned resolutions: 156, not 142.** The authoritative figure is **156** — 228 resolutions
+**2. Unquestioned resolutions: 156, not 142.** The authoritative figure is **156**, or 228 resolutions
 minus the 72 that drew a question. An earlier enumerated list of zero-question resolutions ran to only
 142 rows; that list was incomplete, an artifact of transcribing resolution numbers by hand rather than a
 different finding. The count that governs is the subtraction, and it is the one the story reported.
@@ -59,8 +59,8 @@ thing it claims to be.
 ## The peer test
 
 The comparison to peer boards was an empirical design, not a rhetorical one. A random-number generator
-selected three meetings from each of two peer water boards — the Niagara Falls Water Board and the North
-Harris County Regional Water Authority — across the same 24-month window. Every vote in those six meetings
+selected three meetings from each of two peer water boards, the Niagara Falls Water Board and the North
+Harris County Regional Water Authority, across the same 24-month window. Every vote in those six meetings
 was coded on the same four variables. The six meetings produced 29 votes; 20 were unanimous and nine
 involved split votes, failed motions, or abstentions, a combined unanimity rate of 69% against Pittsburgh
 Water's 100%. The Niagara Falls minutes of April 28, 2025 are archived and hashed in this repository
