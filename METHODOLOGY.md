@@ -21,8 +21,8 @@ Each resolution, and each meeting, was coded on four variables chosen because ea
 deliberation from ratification.
 
 1. **Vote outcome.** Unanimous, split, or carrying an abstention, with the abstaining member named.
-   A split vote is the clearest single mark of a board that decides in the room. Pittsburgh Water
-   recorded none in two years.
+   A split vote is the clearest single mark of a board that decides in the room, and Pittsburgh Water
+   recorded none across the two years.
 2. **Board questions.** The count of questions each member asked, attributed by name. Questions are
    how a board tests what staff brings it. Counted per meeting, the board asked 131; counted against
    specific resolutions, 96. The two counts and their definitions are reconciled in `FACT-CHECK.md`.

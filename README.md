@@ -13,10 +13,10 @@ Reporting by Brian Nuckols for Public Source:
 ## What the reporting found
 
 Across 24 board meetings from October 2023 through September 2025, the Pittsburgh Water board voted
-on 228 resolutions. It was unanimous 223 times and split zero times; the only five abstentions were
-the chair recusing himself for conflicts of interest. It authorized more than $871 million while it
-did so. Of the 228 resolutions, 156 drew no recorded question from any board member. Ten residents
-spoke to the board in two years.
+on 228 resolutions, was unanimous 223 times, and split zero times, authorizing more than $871 million
+along the way, while the only five abstentions were the chair recusing himself for conflicts of
+interest. Of those 228 resolutions, 156 drew no recorded question from any board member. Ten
+residents spoke to the board in two years.
 
 Then a second thing happened, the kind that rarely gets measured. At the first board meeting after
 the investigation published, the board asked 40 questions, about seven times its 24-month average,
