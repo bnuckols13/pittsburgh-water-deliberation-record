@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Unanimity Record — Pittsburgh Water's board, coded vote by vote</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .frame{width:100%;border:1px solid var(--rule);border-radius:10px;background:#fff;margin:1.6rem 0}
+  .frame iframe{width:100%;border:0;border-radius:10px;display:block}
+  .statrow{display:flex;flex-wrap:wrap;gap:1.5rem;margin:1.6rem 0;font-family:-apple-system,system-ui,sans-serif}
+  .statrow .s b{font-size:2rem;line-height:1;display:block;letter-spacing:-.02em}
+  .statrow .s span{font-size:.82rem;color:var(--ink-soft)}
+  .lede-first::first-letter{font-size:3.1rem;float:left;line-height:.82;padding:.3rem .55rem 0 0;color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="doc-meta">
+    <span><b>The Unanimity Record</b></span>
+    <span>A Pittsburgh Water board investigation</span>
+    <span>By <b>Brian Nuckols</b> · Public Source</span>
+    <span class="pill">reproduces with one command</span>
+  </div>
+
+  <h1>228 votes, not one dissent</h1>
+  <p class="subtitle">Two years inside the board that runs Pittsburgh's water, coded from the minutes and checkable line by line.</p>
+
+  <nav class="toc no-print">
+    <strong>In this record</strong>
+    <ol>
+      <li><a href="#scene">A Friday in September</a></li>
+      <li><a href="#finding">What two years of minutes hold</a></li>
+      <li><a href="#peers">The peer test</a></li>
+      <li><a href="#sourcing">Who said so</a></li>
+      <li><a href="#observer">What happened after the story ran</a></li>
+      <li><a href="#check">Check the work</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="scene">A Friday in September</h2>
+  <p class="lede-first">On a Friday morning in late September 2025, five members of the Pittsburgh Water board sat through seven resolutions, among them funding requests that ran from $492,000 to $29 million, and passed every one of them without a recorded question. The minutes note the pattern the way they note all of it: no further discussion held, the board unanimously approved, the resolution was adopted. It reads like the minutes of the meeting before it, and the twenty-three before that.</p>
+  <p>A board that never splits could mean a board that agrees because the work is sound. It could also mean a board that has stopped deciding anything in the room where the public can watch. The difference is not a matter of opinion. It is a matter of the record, and the record can be counted.</p>
+
+  <h2 id="finding">What two years of minutes hold</h2>
+  <p>Every resolution the board voted between October 2023 and September 2025 was coded from the official minutes on four measures: how it voted, what questions it drew, whether anything was discussed, and whether any resident spoke. Twenty-four meetings, and the count comes out the same way every time it is run.</p>
+
+  <div class="statrow">
+    <div class="s"><b>228</b><span>resolutions voted</span></div>
+    <div class="s"><b>223</b><span>unanimous</span></div>
+    <div class="s"><b>0</b><span>no votes</span></div>
+    <div class="s"><b>$871M</b><span>authorized</span></div>
+    <div class="s"><b>156</b><span>drew no question</span></div>
+    <div class="s"><b>10</b><span>residents spoke, in two years</span></div>
+  </div>
+
+  <p>The five abstentions on the board's record were the chair recusing himself for conflicts of interest, not a member breaking from the group. When every member actually voted, the board was unanimous every single time. It authorized more than $871 million along the way, and 156 of the 228 resolutions drew no question from any board member at all.</p>
+
+  <div class="frame"><iframe src="../04-charts/index.html" title="Charts: the unbroken record, the question spike, spending, peer comparison, and questions by member" height="2600" loading="lazy"></iframe></div>
+
+  <h2 id="peers">The peer test</h2>
+  <p>A single board's unanimity means nothing without a baseline, so the investigation built one. A random-number generator selected three meetings from each of two comparable water boards, the Niagara Falls Water Board in New York and the North Harris County Regional Water Authority in Texas, over the same window. Every vote in those six meetings was coded the same way. Twenty of the twenty-nine peer votes were unanimous, a rate of 69 percent against Pittsburgh Water's 100. At Niagara Falls, a single resolution failed 2-2, was rewritten in the open, and passed 3-2, and the meeting ran for 161 minutes. That is what a board deciding in public looks like.</p>
+
+  <div class="frame"><iframe src="../widget/index.html" title="Interactive: the peer test, board by board" height="1180" loading="lazy"></iframe></div>
+
+  <h2 id="sourcing">Who said so</h2>
+  <p>The finding did not rest on the dataset. Nine named sources are on the record: an environmental director who has tracked the utility for a decade, a RAND researcher who studies public trust in water systems, a media-law attorney, two board members answering for their own votes, community organizers who remember when this board argued in public, and the utility's chief executive, who was given the full right of reply and took it.</p>
+  <blockquote>"When there is political capture, unanimous votes are one of the results — the system's being run by an entity that's outside the actual agency." <span class="pill">Myron Arnowitt, Clean Water Action</span></blockquote>
+  <blockquote>"We could be better about daylighting some of the hard discussions we have internally. I'll own that, and we should all own that." <span class="pill">Erika Strassburger, board Vice Chair</span></blockquote>
+  <p>The full map of who carries which claim, with transcripts, is in <a href="../05-sources/index.html">the sourcing record</a>.</p>
+
+  <h2 id="observer">What happened after the story ran</h2>
+  <p>The record has a second half, the kind that rarely gets measured because it requires going back. At the first board meeting after the investigation published, the board asked 40 questions, roughly seven times its 24-month average of about five and a half, and issued a stop-work order against a contractor. The institution changed how it behaved in public, and the change is in the minutes the same way the silence was. A measurement taken after publication is part of the method here, not an afterthought.</p>
+
+  <div class="callout good">
+    <p><b>The claim this record makes about itself:</b> every figure above recomputes from coded data, and every coded figure traces to an archived, hashed source. None of it asks for trust.</p>
+  </div>
+
+  <h2 id="check">Check the work</h2>
+  <p>The repository behind this page carries the data, the archived source minutes, and a harness that reproduces every number offline.</p>
+  <pre><code>python 03-harness/check.py</code></pre>
+  <p>It re-hashes each archived source against the manifest, recomputes 228, 223, $871.25 million, the 72 questioned resolutions, the 69 percent peer rate, and the 40-question follow-up, then prints one verdict. The circulating draft figures — 218 resolutions, 215 unanimous, $1.78 billion, and a one-in-6.9-billion coin-flip probability — are wrong or unsound, and none of them survives in this record; the reasons are set out in the fact-check.</p>
+
+  <footer class="doc-foot">
+    <p>Reporting and data by Brian Nuckols for Public Source. Data licensed CC BY 4.0; harness code MIT. The two published stories: <a href="https://www.publicsource.org/pittsburgh-water-board-unanimous-votes-oversight/">the baseline</a> and <a href="https://www.publicsource.org/pittsburgh-water-board-transparency-rate-hike/">the follow-up</a>.</p>
+  </footer>
+
+</div>
+</body>
+</html>
