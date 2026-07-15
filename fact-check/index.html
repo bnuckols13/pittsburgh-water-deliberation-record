@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fact-check — Pittsburgh Water Deliberation Record</title>
+<style>
+  :root{
+    --plane:#f4f3ef;--surface:#fcfcfb;--surface2:#f7f6f2;
+    --ink:#12110f;--ink2:#4a4843;--muted:#8a887f;
+    --ring:rgba(17,17,15,.11);--ring2:rgba(17,17,15,.06);
+    --blue:#2a78d6;--orange:#c85a2a;--teal:#0e8f8f;--gray:#7d7b73;
+    --ok:#0b8a4d;--caution:#b8801a;--contested:#b5502a;--spine:#5b4b8a;
+    --max:60rem;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --plane:#0e0e0c;--surface:#1a1a17;--surface2:#201f1b;
+    --ink:#f4f2ea;--ink2:#c3c2b7;--muted:#8a887f;
+    --ring:rgba(255,255,255,.13);--ring2:rgba(255,255,255,.06);
+    --blue:#5a9bef;--orange:#e08a5a;--teal:#3fbfbf;--gray:#a5a39a;
+    --ok:#37b978;--caution:#e0b34a;--contested:#e08a5a;--spine:#a99ff0;
+  }}
+  :root[data-theme=dark]{--plane:#0e0e0c;--surface:#1a1a17;--surface2:#201f1b;--ink:#f4f2ea;--ink2:#c3c2b7;--muted:#8a887f;--ring:rgba(255,255,255,.13);--ring2:rgba(255,255,255,.06);--blue:#5a9bef;--orange:#e08a5a;--teal:#3fbfbf;--gray:#a5a39a;--ok:#37b978;--caution:#e0b34a;--contested:#e08a5a;--spine:#a99ff0}
+  :root[data-theme=light]{--plane:#f4f3ef;--surface:#fcfcfb;--surface2:#f7f6f2;--ink:#12110f;--ink2:#4a4843;--muted:#8a887f;--ring:rgba(17,17,15,.11);--ring2:rgba(17,17,15,.06);--blue:#2a78d6;--orange:#c85a2a;--teal:#0e8f8f;--gray:#7d7b73;--ok:#0b8a4d;--caution:#b8801a;--contested:#b5502a;--spine:#5b4b8a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--plane);color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--max);margin:0 auto;padding:2.4rem 1.1rem 5rem}
+  a{color:var(--blue)}
+  .kick{font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 .4rem}
+  h1{font-size:1.7rem;line-height:1.14;margin:0 0 .5rem;letter-spacing:-.01em}
+  .lede{color:var(--ink2);max-width:46rem;margin:0 0 1.4rem}
+  .backlink{font-size:.85rem;margin:0 0 1.6rem}
+  .spine-box{background:var(--surface);border:1px solid var(--ring);border-left:4px solid var(--spine);
+    border-radius:10px;padding:1rem 1.2rem;margin:0 0 1.3rem}
+  .spine-box b{color:var(--spine)}
+  h2{font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:1.8rem 0 .7rem}
+  .recon{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;margin-bottom:.6rem}
+  @media(max-width:680px){.recon{grid-template-columns:1fr}}
+  .rc{background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:.85rem .95rem}
+  .rc .h{font-weight:700;font-size:.92rem;margin-bottom:.25rem}
+  .rc .b{font-size:.85rem;color:var(--ink2)}
+  .rc .num{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:700}
+  .controls{position:sticky;top:0;z-index:5;background:var(--plane);padding:.7rem 0 .6rem;margin-bottom:.3rem;
+    border-bottom:1px solid var(--ring2)}
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.55rem}
+  .chip{border:1px solid var(--ring);background:var(--surface);color:var(--ink2);border-radius:999px;
+    padding:.32rem .8rem;font:600 .82rem/1 system-ui,sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem}
+  .chip[aria-pressed=true]{background:var(--ink);color:var(--plane);border-color:var(--ink)}
+  .chip .dot{width:9px;height:9px;border-radius:50%}
+  .chip.da .dot{background:var(--blue)} .chip.wd .dot{background:var(--orange)}
+  .chip.ut .dot{background:var(--teal)} .chip.co .dot{background:var(--gray)}
+  .chip .n{opacity:.6;font-weight:700}
+  .searchrow{display:flex;gap:.5rem;align-items:center}
+  .searchrow input{flex:1;background:var(--surface);border:1px solid var(--ring);border-radius:8px;
+    padding:.5rem .7rem;color:var(--ink);font:.9rem system-ui,sans-serif}
+  .count{font-size:.8rem;color:var(--muted);white-space:nowrap}
+  .list{margin-top:1rem;display:flex;flex-direction:column;gap:.65rem}
+  .card{background:var(--surface);border:1px solid var(--ring);border-radius:11px;overflow:hidden}
+  .card.spine{border-color:var(--spine)}
+  .head{display:grid;grid-template-columns:auto 1fr auto auto;gap:.7rem;align-items:start;
+    padding:.9rem 1rem;cursor:pointer}
+  .side{font-size:.64rem;letter-spacing:.05em;text-transform:uppercase;font-weight:800;
+    padding:.28rem .5rem;border-radius:6px;white-space:nowrap;margin-top:.1rem}
+  .side.da{background:color-mix(in srgb,var(--blue) 16%,transparent);color:var(--blue)}
+  .side.wd{background:color-mix(in srgb,var(--orange) 16%,transparent);color:var(--orange)}
+  .side.ut{background:color-mix(in srgb,var(--teal) 18%,transparent);color:var(--teal)}
+  .side.co{background:color-mix(in srgb,var(--gray) 20%,transparent);color:var(--ink2)}
+  .claim{font-weight:600;line-height:1.4}
+  .who{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+  .verdict{font-size:.72rem;font-weight:700;text-align:right;white-space:nowrap;padding-top:.15rem}
+  .v-ok{color:var(--ok)} .v-caution{color:var(--caution)} .v-contested{color:var(--contested)} .v-spine{color:var(--spine)}
+  .chev{color:var(--muted);transition:transform .15s;font-size:.9rem;margin-top:.15rem}
+  .card.open .chev{transform:rotate(90deg)}
+  .body{display:none;padding:0 1rem 1rem;border-top:1px solid var(--ring2)}
+  .card.open .body{display:block}
+  .body .label{font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:.9rem 0 .3rem}
+  .body .says{color:var(--ink);background:var(--surface2);border-radius:8px;padding:.7rem .85rem;font-size:.92rem}
+  .body .verd{color:var(--ink2);font-size:.9rem;margin-top:.5rem}
+  .srclinks{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.85rem}
+  .srclinks a{font:600 .8rem/1 system-ui,sans-serif;text-decoration:none;border:1px solid var(--ring);
+    border-radius:7px;padding:.42rem .7rem;color:var(--ink);background:var(--surface2);display:inline-flex;gap:.35rem;align-items:center}
+  .srclinks a:hover{border-color:var(--blue);color:var(--blue)}
+  .srclinks .arch{color:var(--muted)}
+  .empty{color:var(--muted);text-align:center;padding:2rem;display:none}
+  .verify{background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:1rem 1.2rem;margin-top:1.6rem;font-size:.9rem}
+  .verify code{background:var(--surface2);padding:.12rem .4rem;border-radius:5px;font-size:.85em}
+  .foot{color:var(--muted);font-size:.8rem;margin-top:1.6rem;border-top:1px solid var(--ring2);padding-top:1rem}
+  .toggle{position:fixed;top:.7rem;right:.7rem;background:var(--surface);border:1px solid var(--ring);
+    color:var(--ink2);border-radius:999px;padding:.3rem .7rem;font:.72rem system-ui,sans-serif;cursor:pointer;z-index:9}
+  .exp{background:none;border:0;color:var(--blue);font:600 .8rem system-ui,sans-serif;cursor:pointer;padding:0}
+</style>
+</head>
+<body>
+<button class="toggle" onclick="var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';r.setAttribute('data-theme',d?'light':'dark')">◐ theme</button>
+<div class="wrap">
+  <p class="kick">Fact-check · the claim ledger</p>
+  <h1>Every claim in the story, traced to what its source actually says</h1>
+  <p class="lede">The reporter's coded figures, the experts and advocates, the utility's own responses, and the legal and academic benchmarks — each mapped to the evidence behind it, what that evidence supports, and where it stops. Filter by side, search the text, and open any claim for its verdict and a direct link to both the original source and the archived copy in the repository.</p>
+  <p class="backlink"><a href="../site/index.html">← Back to the story</a> · <a href="../index.html">package home</a> · <a href="../FACT-CHECK.md">plain-text version</a></p>
+
+  <div class="spine-box">
+    <b>The spine.</b> The board was unanimous on all 228 votes over two years. By its Vice Chair's own account, the deliberation that would explain that happens in an hour-long executive session before each public meeting — and a media-law attorney says the Sunshine Act does not permit a closed session that decides the day's agenda. The dispute is not whether the board agrees. It is where the deciding happens, and whether the public is allowed to watch.
+  </div>
+
+  <h2>Three reconciliations</h2>
+  <div class="recon">
+    <div class="rc"><div class="h">Two question counts</div><div class="b">Counted per meeting the board asked <span class="num">131</span>; counted against specific resolutions, <span class="num">96</span>. The gap is general-discussion questions. Both are correct for what they measure.</div></div>
+    <div class="rc"><div class="h">Unquestioned: 156, not 142</div><div class="b">The governing figure is <span class="num">156</span> (228 − 72 questioned). An earlier enumerated list ran to only 142 rows; it was incomplete, not a different finding.</div></div>
+    <div class="rc"><div class="h">Draft → published</div><div class="b">An early draft said 218 / 215 / <span class="num">$1.78B</span>. Continued coding corrected those to <span class="num">228 / 223 / $871.25M</span> before publication. Only the published figures ship.</div></div>
+  </div>
+
+  <div class="controls">
+    <div class="chips" id="chips">
+      <button class="chip" data-side="all" aria-pressed="true">All <span class="n" id="cAll"></span></button>
+      <button class="chip da" data-side="data" aria-pressed="false"><span class="dot"></span>Data <span class="n" data-c="data"></span></button>
+      <button class="chip wd" data-side="watchdog" aria-pressed="false"><span class="dot"></span>Watchdog <span class="n" data-c="watchdog"></span></button>
+      <button class="chip ut" data-side="utility" aria-pressed="false"><span class="dot"></span>Utility <span class="n" data-c="utility"></span></button>
+      <button class="chip co" data-side="context" aria-pressed="false"><span class="dot"></span>Context <span class="n" data-c="context"></span></button>
+    </div>
+    <div class="searchrow">
+      <input id="q" type="search" placeholder="Search claims, sources, verdicts…" aria-label="Search claims">
+      <span class="count" id="count"></span>
+      <button class="exp" id="expandAll">Expand all</button>
+    </div>
+  </div>
+
+  <div class="list" id="list"></div>
+  <div class="empty" id="empty">No claims match that filter.</div>
+
+  <div class="verify">
+    <b>Check the work.</b> Every claim above resolves to a source in the repository, and every coded figure recomputes from the committed data. From the package folder:
+    <br><code>python 03-harness/check.py</code>
+    <br>It re-hashes each archived source and rebuilds every headline figure, then prints one verdict.
+  </div>
+  <p class="foot">Reporter: Brian Nuckols · Public Source · baseline story Dec 2, 2025. Machine-readable data: <code>02-data/</code>. Interview recordings live in the reporter's Drive; transcripts are in the repository. Data CC BY 4.0.</p>
+</div>
+
+<script>
+const SRC = {
+  "minutes":{t:"Pittsburgh Water board minutes (24 meetings)",u:"https://www.pgh2o.com/about-us/board-board-meetings/board-minutes-agendas",p:"../02-data/meetings.csv",pl:"Coded data (build.py)"},
+  "followup":{t:"Public Source — the follow-up story",u:"https://www.publicsource.org/pittsburgh-water-board-transparency-rate-hike/",p:"../02-data/follow_up.csv",pl:"Coded data"},
+  "peer":{t:"Niagara Falls Water Board minutes, Apr 28 2025",u:"https://nfwb.org/app/uploads/2025/06/Draft-April-28-2025-NFWB-Business-Meeting-Minutes.pdf",p:"../01-sources-archive/raw/nfwb-2025-04-28.pdf",pl:"Archived copy (hashed)"},
+  "arnowitt":{t:"Interview — Myron Arnowitt (recording)",u:"https://drive.google.com/file/d/1zA-etDaPCELvuoT-q1tKewjJxFFXRWw0/view",p:"../05-sources/transcripts/arnowitt-2025-11-03.md",pl:"Transcript (in repo)"},
+  "warrenmears":{t:"Interview — Linnea Warren Mears (recording)",u:"https://drive.google.com/file/d/1mCpQL7PYOGIm6CN1e9QkJzzo0ocmoxij/view",p:"../05-sources/transcripts/warren-mears-2025-09-05.md",pl:"Transcript (in repo)"},
+  "melewsky":{t:"Interview — Melissa Melewsky (recording)",u:"https://drive.google.com/file/d/1MDgsNqzlkSHPeWvTEaXhHXv231eSeIxA/view",p:"../05-sources/transcripts/melewsky-2025-11-17.md",pl:"Transcript (in repo)"},
+  "strassburger":{t:"Interview — Erika Strassburger (recording)",u:"https://drive.google.com/file/d/1JfuekZu6BGbWEIg0YvHTqSUM0bYeUW7A/view",p:"../05-sources/transcripts/strassburger-2025-11-04.md",pl:"Transcript (in repo)"},
+  "story":{t:"Public Source — the baseline story",u:"https://www.publicsource.org/pittsburgh-water-board-unanimous-votes-oversight/",p:"../01-sources-archive/PROVENANCE.md",pl:"Provenance + Wayback"},
+  "occ":{t:"OCC Comptroller's Handbook — board effectiveness",u:"https://www.occ.gov/publications-and-resources/publications/comptrollers-handbook/files/bank-supervision-process/pub-ch-bank-supervision-process.pdf",p:"../01-sources-archive/raw/occ-bank-supervision-process.pdf",pl:"Archived copy (hashed)"},
+  "kennesaw":{t:"Kennesaw State — 848 Enron board votes",u:"https://www.kennesaw.edu/coles/research/docs/spring-2024/spring-2024-02.pdf",p:"../01-sources-archive/raw/kennesaw-enron.pdf",pl:"Archived copy (hashed)"},
+  "sunshine":{t:"Pennsylvania Sunshine Act, 65 Pa.C.S. Ch. 7",u:"https://www.legis.state.pa.us/cfdocs/legis/LI/consCheck.cfm?txtType=HTM&ttl=65&div=0&chpt=7",p:"../01-sources-archive/PROVENANCE.md",pl:"Provenance + Wayback"}
+};
+const CLAIMS = [
+  {id:"S",side:"data",spine:true,tone:"spine",vlabel:"Where the deliberation goes",
+   claim:"The board was unanimous on all 228 votes; by its own Vice Chair's account, the deliberation that would explain it happens in a closed executive session before each public meeting.",
+   who:"Reporter's coding of the minutes + Vice Chair Erika Strassburger",src:"strassburger",
+   says:"Strassburger, on the record: \"before every monthly meeting, at the very least an hour-long executive session... a deeper discussion of what's going to be on the agenda that day.\" The reporter's coding shows 223 of 228 votes unanimous, zero split. Melewsky says the Sunshine Act does not permit a closed session that pre-decides the public agenda.",
+   verdict:"Corroborated by the board itself — the spine of the story."},
+
+  {id:"D1",side:"data",tone:"ok",vlabel:"Reproduces",
+   claim:"Over two years the board voted on 228 resolutions and was unanimous 223 times, with zero no votes.",
+   who:"Reporter's coding of the official minutes",src:"minutes",
+   says:"meetings.csv sums to 228 resolutions, 223 unanimous, 0 split; the five abstentions were Chair Sciulli's conflict-of-interest recusals. build.py recomputes each figure and exits non-zero if any drifts.",
+   verdict:"Reproduces from the committed data; matches the published story."},
+  {id:"D2",side:"data",tone:"ok",vlabel:"Reproduces",
+   claim:"156 of the 228 resolutions drew no recorded question from any board member.",
+   who:"Reporter's coding of the official minutes",src:"minutes",
+   says:"228 total minus 72 that drew at least one question equals 156. An earlier enumerated zero-question list under-counted at 142; the subtraction (156) is the figure the story reported.",
+   verdict:"Reproduces (228 − 72). See reconciliation above."},
+  {id:"D3",side:"data",tone:"ok",vlabel:"Reproduces",
+   claim:"The board authorized more than $871 million over the two years.",
+   who:"Reporter's coding of the official minutes",src:"minutes",
+   says:"The dollar column of meetings.csv sums to $871.25 million. The circulating draft figure of $1.78 billion is wrong and appears nowhere in this package.",
+   verdict:"Reproduces; rounds to \">$870M\" as published."},
+  {id:"D4",side:"data",tone:"ok",vlabel:"Reproduces",
+   claim:"Ten residents spoke to the board over two years, at five of 24 meetings.",
+   who:"Reporter's coding of the official minutes",src:"minutes",
+   says:"meetings.csv records 10 public speakers total, with a non-zero speaker count at 5 of the 24 meetings.",
+   verdict:"Reproduces from the committed data."},
+  {id:"D5",side:"data",tone:"ok",vlabel:"Reproduces",
+   claim:"At the first meeting after the story published, the board asked 40 questions, about seven times its 24-month average.",
+   who:"Reporter's coding of the follow-up meeting",src:"followup",
+   says:"follow_up.csv records 40 questions; the 24-month average is 131 ÷ 24 ≈ 5.5; the ratio is ≈ 7.3. The board also issued a stop-work order that meeting.",
+   verdict:"Reproduces; the observer-effect figure."},
+  {id:"D6",side:"data",tone:"caution",vlabel:"Recomputed (partial archive)",
+   claim:"Against two randomly-sampled peer boards, 20 of 29 votes were unanimous — 69% — versus Pittsburgh Water's 100%.",
+   who:"Reporter's random-sampled peer comparison",src:"peer",
+   says:"The published comparison drew three randomly-selected meetings from each of two peer utilities. The Niagara Falls minutes are archived and hashed; the per-utility vote splits and the North Harris County PDF are a documented pending-archive item.",
+   verdict:"Recomputed from the archived Niagara Falls minutes; North Harris County still to be captured."},
+
+  {id:"W1",side:"watchdog",tone:"caution",vlabel:"Verified quote",
+   claim:"\"When there is political capture, unanimous votes are one of the results.\"",
+   who:"Myron Arnowitt, Pennsylvania director, Clean Water Action",src:"arnowitt",
+   says:"Character-verified against the recording. Arnowitt frames unanimity as a possible signal of capture, not proof: \"that's not necessarily what is happening when you have tons of unanimous votes, but when there is political capture, that is one of the results.\"",
+   verdict:"Verified quote, framed by the source as a signal, not a finding."},
+  {id:"W2",side:"watchdog",tone:"ok",vlabel:"Verified quote",
+   claim:"Meaningful participation changes a decision — ten speakers in two years is thin by that standard.",
+   who:"Linnea Warren Mears, policy researcher, RAND",src:"warrenmears",
+   says:"Warren Mears, character-verified: \"Meaningful participation changes a decision, or there can be a clear line drawn between what the participation has involved and what the utility has done.\" Her standard is what the 10-speaker figure is measured against.",
+   verdict:"Verified quote; supplies the benchmark, not a claim of wrongdoing."},
+  {id:"W3",side:"watchdog",tone:"contested",vlabel:"Legal opinion",
+   claim:"An hour-long executive session that pre-discusses agenda items is not how the Sunshine Act is supposed to work.",
+   who:"Melissa Melewsky, media-law counsel, PA NewsMedia Association",src:"melewsky",
+   says:"Melewsky, character-verified: \"there's no executive session that allows public officials to essentially have the public meeting before they have the public meeting.\" Grounded in the Sunshine Act's public-deliberation requirement; the utility disputes the characterization.",
+   verdict:"Legal opinion, character-verified; contested by the utility."},
+  {id:"W4",side:"watchdog",tone:"caution",vlabel:"Attributed",
+   claim:"This board used to hash things out in public; it is disappointing they no longer discuss in public.",
+   who:"Aly Shaw, former organizer, Our Water Campaign / Pittsburgh United",src:"story",
+   says:"Shaw's firsthand recollection of the board's earlier practice, quoted in the published story. It is a historical account, not coded against minutes from that earlier era.",
+   verdict:"Attributed historical recollection; the control case for \"this is a change.\""},
+
+  {id:"U1",side:"utility",tone:"contested",vlabel:"Utility response",
+   claim:"Unanimity reflects consistent education, tenured board members, and informational discussions prior to the public meetings.",
+   who:"Will Pickering, CEO, Pittsburgh Water (written response)",src:"story",
+   says:"The utility's written explanation, given the full right of reply before publication. Pickering also urged viewing the meeting recordings, which he said show more discussion than the minutes.",
+   verdict:"The utility's on-record explanation for the pattern."},
+  {id:"U2",side:"utility",tone:"caution",vlabel:"Partial concession",
+   claim:"Most of what we vote on is uncontroversial — but we could be better about daylighting the hard discussions.",
+   who:"Erika Strassburger, board Vice Chair",src:"strassburger",
+   says:"Character-verified. The board's own account both explains the unanimity (routine resolutions) and concedes the transparency gap: \"I'll own that, and we should all own that.\"",
+   verdict:"The board concedes the daylighting gap, on the record."},
+  {id:"U3",side:"utility",tone:"contested",vlabel:"Utility response",
+   claim:"Effective board deliberation starts with transparent communication and a forum for questions and discussion.",
+   who:"Alex Sciulli, board Chair (written response)",src:"story",
+   says:"The chair's stated deliberation standard, given the right of reply. Sciulli asked roughly 36% of all recorded questions and cast all five recusal-abstentions.",
+   verdict:"The chair's stated standard, on the record."},
+
+  {id:"C1",side:"context",tone:"ok",vlabel:"Documented",
+   claim:"Approval rates approaching 99–100% can indicate a board has ceased providing active oversight and independent judgment.",
+   who:"Office of the Comptroller of the Currency, board-effectiveness guidance",src:"occ",
+   says:"Direct from the archived Comptroller's Handbook, Bank Supervision Process. Applied as an outside benchmark for what a near-perfect approval rate can mean.",
+   verdict:"Documented in the archived federal guidance."},
+  {id:"C2",side:"context",tone:"ok",vlabel:"Documented",
+   claim:"A study of 848 Enron board votes found 99.5% unanimity — and warned a questioning board can still be a rubber stamp.",
+   who:"Kennesaw State University analysis (2024)",src:"kennesaw",
+   says:"From the archived study: \"even a board that routinely and vigilantly challenges management with questions is not a sufficient shield to protect it from being a rubber stamp board.\"",
+   verdict:"Documented in the archived study."},
+  {id:"C3",side:"context",tone:"ok",vlabel:"Statute",
+   claim:"No executive session shall be used as a subterfuge to defeat the open-meetings requirement (Sunshine Act §708(c)).",
+   who:"Pennsylvania Sunshine Act, 65 Pa.C.S. Ch. 7",src:"sunshine",
+   says:"The statute's text. The archived-copy link points to the provenance record, which carries the origin URL and its Wayback citation.",
+   verdict:"Statutory text; the legal frame the story is measured against."}
+];
+const SIDE={data:"da",watchdog:"wd",utility:"ut",context:"co"};
+const SLAB={data:"Data",watchdog:"Watchdog",utility:"Utility",context:"Context"};
+const list=document.getElementById('list'), empty=document.getElementById('empty'),
+      qEl=document.getElementById('q'), countEl=document.getElementById('count');
+let filter="all", query="";
+
+function render(){
+  list.innerHTML="";
+  const q=query.trim().toLowerCase();
+  let n=0;
+  CLAIMS.forEach(c=>{
+    if(filter!=="all" && c.side!==filter) return;
+    const s=SRC[c.src];
+    const hay=(c.claim+" "+c.who+" "+c.says+" "+c.verdict+" "+s.t).toLowerCase();
+    if(q && !hay.includes(q)) return;
+    n++;
+    const el=document.createElement('div');
+    el.className="card"+(c.spine?" spine":"");
+    el.innerHTML=`
+      <div class="head" role="button" tabindex="0" aria-expanded="false">
+        <span class="side ${SIDE[c.side]}">${SLAB[c.side]}</span>
+        <div><div class="claim">${c.claim}</div><div class="who">${c.who}</div></div>
+        <div class="verdict v-${c.tone}">${c.vlabel}</div>
+        <span class="chev">▸</span>
+      </div>
+      <div class="body">
+        <div class="label">What the source says</div>
+        <div class="says">${c.says}</div>
+        <div class="verd"><b>Verdict:</b> ${c.verdict}</div>
+        <div class="srclinks">
+          <a href="${s.u}" target="_blank" rel="noopener">Source: ${s.t} ↗</a>
+          <a class="arch" href="${s.p}" target="_blank" rel="noopener">${s.pl}</a>
+        </div>
+      </div>`;
+    const head=el.querySelector('.head');
+    const toggle=()=>{el.classList.toggle('open');head.setAttribute('aria-expanded',el.classList.contains('open'))};
+    head.addEventListener('click',toggle);
+    head.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});
+    list.appendChild(el);
+  });
+  empty.style.display=n?"none":"block";
+  countEl.textContent=n+" of "+CLAIMS.length;
+}
+document.querySelectorAll('#chips .chip').forEach(ch=>{
+  ch.addEventListener('click',()=>{
+    filter=ch.dataset.side;
+    document.querySelectorAll('#chips .chip').forEach(x=>x.setAttribute('aria-pressed', x===ch));
+    render();
+  });
+});
+qEl.addEventListener('input',()=>{query=qEl.value;render()});
+let expanded=false;
+document.getElementById('expandAll').addEventListener('click',(e)=>{
+  expanded=!expanded;
+  document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('open',expanded);
+    c.querySelector('.head').setAttribute('aria-expanded',expanded)});
+  e.target.textContent=expanded?"Collapse all":"Expand all";
+});
+document.getElementById('cAll').textContent="("+CLAIMS.length+")";
+["data","watchdog","utility","context"].forEach(sd=>{
+  document.querySelector('.n[data-c="'+sd+'"]').textContent="("+CLAIMS.filter(c=>c.side===sd).length+")";
+});
+render();
+</script>
+</body>
+</html>
