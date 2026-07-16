@@ -41,7 +41,11 @@ def main():
     b_rc, b_out = run("build.py", "--check")
     print(b_out)
 
-    ok = (v_rc == 0 and b_rc == 0)
+    print("\n--- database (build_db.py --check) " + "-" * 24)
+    d_rc, d_out = run("build_db.py", "--check")
+    print(d_out)
+
+    ok = (v_rc == 0 and b_rc == 0 and d_rc == 0)
     print("\n" + "=" * 60)
     if ok:
         print("TRUSTED. Every source hashes clean and every headline figure reproduces")

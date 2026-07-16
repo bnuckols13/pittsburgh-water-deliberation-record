@@ -47,6 +47,7 @@ each source PDF against `01-sources-archive/MANIFEST.md`. Neither reaches the ne
 04-charts/          five charts, self-contained, light and dark
 widget/             the peer test, an interactive comparison against peer water boards
 05-sources/         the human sourcing: interviews, roles, and the claims each supports
+db/                 a normalized SQLite database of the coded record, queryable in the browser
 fact-check/         the interactive claim ledger: filter by side, search, open any claim for its verdict and links
 FACT-CHECK.md       the plain-text companion to the ledger: every figure mapped to its source, three reconciliations
 METHODOLOGY.md      the four-variable codebook and the peer sampling design

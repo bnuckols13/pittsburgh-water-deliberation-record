@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Query the Pittsburgh Water board database</title>
+<style>
+  :root{--surface:#fbfaf7;--plane:#f4f2ea;--card:#fff;--ink:#1a1908;--secondary:#52514e;--muted:#898781;
+    --grid:#e6e3da;--accent:#5b4b8a;--accent-soft:#efeaf6;--s1:#2a78d6;--border:rgba(11,11,11,.10);
+    --mono:"Cascadia Code",Consolas,"SF Mono",monospace;}
+  @media (prefers-color-scheme:dark){:root{--surface:#16150f;--plane:#0d0d0a;--card:#1e1d16;--ink:#f4f2e9;--secondary:#c3c2b7;--muted:#8f8d86;--grid:#2c2c2a;--accent:#9085e9;--accent-soft:#231f33;--s1:#3987e5;--border:rgba(255,255,255,.12);}}
+  :root[data-theme="dark"]{--surface:#16150f;--plane:#0d0d0a;--card:#1e1d16;--ink:#f4f2e9;--secondary:#c3c2b7;--muted:#8f8d86;--grid:#2c2c2a;--accent:#9085e9;--accent-soft:#231f33;--s1:#3987e5;--border:rgba(255,255,255,.12);}
+  :root[data-theme="light"]{--surface:#fbfaf7;--plane:#f4f2ea;--card:#fff;--ink:#1a1908;--secondary:#52514e;--muted:#898781;--grid:#e6e3da;--accent:#5b4b8a;--accent-soft:#efeaf6;--s1:#2a78d6;--border:rgba(11,11,11,.10);}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--plane);color:var(--ink);line-height:1.55;padding:2rem 1rem;font-family:Georgia,"Palatino Linotype",serif}
+  .wrap{max-width:56rem;margin:0 auto}
+  h1{font-size:1.6rem;letter-spacing:-.01em;margin:0 0 .3rem}
+  .sub{color:var(--secondary);font-style:italic;margin:0 0 1.4rem}
+  .ui{font-family:-apple-system,"Segoe UI",system-ui,sans-serif}
+  .presets{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
+  .presets button{font:inherit;font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:.28rem .7rem;color:var(--secondary);cursor:pointer}
+  .presets button:hover{border-color:var(--accent);color:var(--accent)}
+  textarea{width:100%;min-height:8.5rem;font-family:var(--mono);font-size:.86rem;line-height:1.5;
+    background:var(--card);color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:.9rem 1rem;resize:vertical;tab-size:2}
+  .bar{display:flex;align-items:center;gap:.8rem;margin:.7rem 0}
+  .run{font:inherit;font-family:-apple-system,system-ui,sans-serif;font-weight:600;font-size:.9rem;
+    background:var(--accent);color:#fff;border:0;border-radius:8px;padding:.5rem 1.1rem;cursor:pointer}
+  .run:disabled{opacity:.5;cursor:default}
+  .status{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--muted)}
+  .err{color:#d03b3b}
+  .out{overflow-x:auto;margin-top:.4rem;border:1px solid var(--border);border-radius:10px;background:var(--card)}
+  table{border-collapse:collapse;width:100%;font-family:-apple-system,system-ui,sans-serif;font-size:.84rem}
+  th,td{text-align:left;padding:.45rem .7rem;border-bottom:1px solid var(--grid);white-space:nowrap;font-variant-numeric:tabular-nums}
+  th{background:var(--accent-soft);color:var(--accent);position:sticky;top:0;font-size:.76rem;text-transform:uppercase;letter-spacing:.02em}
+  tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface) 60%,transparent)}
+  .schema{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--secondary);margin-top:1.6rem;border-top:1px solid var(--grid);padding-top:.9rem}
+  .schema code{font-family:var(--mono);background:var(--accent-soft);padding:.05rem .35rem;border-radius:4px;font-size:.85em}
+  a{color:var(--accent)}
+  .theme-btn{position:fixed;top:.6rem;right:.6rem;font:inherit;font-family:system-ui,sans-serif;font-size:.78rem;background:var(--surface);color:var(--secondary);border:1px solid var(--border);border-radius:6px;padding:.25rem .6rem;cursor:pointer}
+</style>
+</head>
+<body>
+<button class="theme-btn" id="themeBtn">◐ theme</button>
+<div class="wrap">
+  <h1>Query the board record</h1>
+  <p class="sub">A normalized SQLite database of every coded Pittsburgh Water board vote, running in your browser. Write SQL, or click a starter query. Nothing leaves the page.</p>
+
+  <div class="presets ui" id="presets"></div>
+  <textarea id="sql" spellcheck="false">SELECT * FROM v_headline;</textarea>
+  <div class="bar">
+    <button class="run" id="run" disabled>Run</button>
+    <span class="status" id="status">Loading the database…</span>
+  </div>
+  <div class="out" id="out"></div>
+
+  <div class="schema">
+    <b>Tables:</b> <code>meetings</code> (24) · <code>board_members</code> (8) ·
+    <code>questioned_resolutions</code> (72) · <code>resolution_questions</code> (82, the
+    who-asked-what junction) · <code>peer_boards</code>.
+    <b>Views:</b> <code>v_headline</code>, <code>v_questions_by_member</code>.
+    Full schema in <a href="schema.sql">schema.sql</a>; more examples in <a href="queries.sql">queries.sql</a>.
+    Rebuild with <code>python 03-harness/build_db.py</code>.
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
+<script>
+const PRESETS = [
+  ["Headline figures", "SELECT * FROM v_headline;"],
+  ["Every meeting", "SELECT meeting_date, total_resolutions, unanimous, abstentions, split_votes\nFROM meetings ORDER BY meeting_date;"],
+  ["Who asked (from the junction)", "SELECT bm.name, bm.role, SUM(rq.question_count) AS questions\nFROM resolution_questions rq\nJOIN board_members bm ON bm.member_id = rq.member_id\nGROUP BY rq.member_id ORDER BY questions DESC;"],
+  ["Most-questioned resolutions", "SELECT qr.resolution_no, qr.total_questions, COUNT(rq.member_id) AS members_engaged\nFROM questioned_resolutions qr\nJOIN resolution_questions rq ON rq.resolution_no = qr.resolution_no\nGROUP BY qr.resolution_no ORDER BY qr.total_questions DESC LIMIT 10;"],
+  ["The peer test", "SELECT utility, votes, unanimous, contested, unanimity_pct, longest_meeting_min\nFROM peer_boards ORDER BY unanimity_pct DESC;"],
+  ["Spending by year", "SELECT substr(meeting_date,1,4) AS year, COUNT(*) AS meetings,\n       SUM(total_resolutions) AS resolutions, ROUND(SUM(dollars_millions),2) AS dollars_millions\nFROM meetings GROUP BY year ORDER BY year;"],
+  ["Meetings with speakers", "SELECT meeting_date, public_speakers, notable_items\nFROM meetings WHERE public_speakers > 0 ORDER BY meeting_date;"],
+];
+const $ = id => document.getElementById(id);
+$("presets").innerHTML = PRESETS.map((p,i)=>`<button data-i="${i}">${p[0]}</button>`).join("");
+$("presets").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+  $("sql").value = PRESETS[b.dataset.i][1]; run();
+}));
+
+let db = null;
+function render(res){
+  const out = $("out");
+  if(!res.length){ out.innerHTML = '<p class="status" style="padding:.8rem">No rows.</p>'; $("status").textContent="0 rows"; return; }
+  const {columns, values} = res[0];
+  let h = "<table><thead><tr>" + columns.map(c=>`<th>${c}</th>`).join("") + "</tr></thead><tbody>";
+  h += values.map(r=>"<tr>"+r.map(v=>`<td>${v===null?'<span style="color:var(--muted)">NULL</span>':String(v)}</td>`).join("")+"</tr>").join("");
+  out.innerHTML = h + "</tbody></table>";
+  $("status").textContent = `${values.length} row${values.length===1?"":"s"}`;
+  $("status").classList.remove("err");
+}
+function run(){
+  if(!db) return;
+  try{ render(db.exec($("sql").value)); }
+  catch(e){ $("out").innerHTML=""; $("status").textContent = e.message; $("status").classList.add("err"); }
+}
+$("run").addEventListener("click", run);
+$("sql").addEventListener("keydown", e=>{ if((e.ctrlKey||e.metaKey)&&e.key==="Enter") run(); });
+
+initSqlJs({ locateFile: f => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/${f}` })
+  .then(SQL => fetch("pittsburgh_water.db").then(r=>r.arrayBuffer()).then(buf=>{
+    db = new SQL.Database(new Uint8Array(buf));
+    $("run").disabled = false;
+    $("status").textContent = "Ready. Ctrl+Enter runs.";
+    run();
+  }))
+  .catch(e => { $("status").textContent = "Could not load the SQL engine: " + e.message; $("status").classList.add("err"); });
+
+$("themeBtn").addEventListener("click",()=>{const r=document.documentElement,c=r.getAttribute("data-theme");
+  const d=c?c==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.setAttribute("data-theme",d?"light":"dark");});
+</script>
+</body>
+</html>
